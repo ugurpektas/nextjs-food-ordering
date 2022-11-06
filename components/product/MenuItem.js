@@ -1,12 +1,12 @@
-import Image from 'next/image';
-import { RiShoppingCart2Fill } from 'react-icons/ri';
-import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
-import { addProduct } from '../../redux/cartSlice';
+import Image from "next/image";
+import { RiShoppingCart2Fill } from "react-icons/ri";
+import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct } from "../../redux/cartSlice";
 
 const MenuItem = ({ product }) => {
-  const cart = useSelector(state => state.cart);
-  const findCart = cart.products.find(item => item._id === product._id);
+  const cart = useSelector((state) => state.cart);
+  const findCart = cart.products.find((item) => item._id === product._id);
 
   const dispatch = useDispatch();
 
@@ -14,8 +14,8 @@ const MenuItem = ({ product }) => {
     dispatch(
       addProduct({
         ...product,
-        extras: [{ text: 'empty' }],
-        price: product.prices[0],
+        extras: [{ text: "empty" }],
+        price: product.price[0],
         quantity: 1,
       })
     );
@@ -34,7 +34,7 @@ const MenuItem = ({ product }) => {
         <h4 className="text-xl font-semibold">{product.title}</h4>
         <p className="text-[15px]">{product.desc}</p>
         <div className="flex justify-between items-center mt-4">
-          <span>${product.prices[0]}</span>
+          <span>${product.price.length ? product.price[0] : ""}</span>
           <button
             className="btn-primary !w-10 !h-10 !rounded-full !p-0 grid place-content-center"
             disabled={findCart}
